@@ -27,7 +27,7 @@ func NewModule(c *config.Config) *Module {
 
 	m.CoreMasterDB = db.Get("CoreMaster")
 	if m.CoreMasterDB == nil {
-		log.Panic("[ERROR] connecting to CoreMaster")
+		log.Println("[ERROR] connecting to CoreMaster")
 		return nil
 	}
 

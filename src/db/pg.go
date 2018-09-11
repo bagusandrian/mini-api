@@ -61,7 +61,7 @@ func Get(conn string) *sqlx.DB {
 
 	db, err = sqlx.Connect(strDriver, strConn)
 	if err != nil {
-		log.Panicf("[db] problem establishing connection sqlx.Connect:%+v\n", err)
+		log.Printf("[db] problem establishing connection sqlx.Connect:%+v\n", err)
 		return nil
 	}
 

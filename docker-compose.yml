@@ -3,27 +3,24 @@
     services:
       postgres:
         image: postgres
-        container_name: pstgres
+        container_name: postgres
         environment:
           POSTGRES_USER: mini_api
           POSTGRES_PASSWORD: p4ssw0rd
           POSTGRES_DB: mini-api
+        restart: on-failure
         volumes:
-          - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+          - ./db.sql:/docker-entrypoint-initdb.d/db.sql 
         ports:
         - "5433:5432"
 
       golang:
-        image: golang:1.11.0-stretch
+        image: wedus
         container_name: mini-api
-        environment: 
-          - GOPATH=/go
-          - PATH=$GOPATH/bin:$PATH
-        volumes:
-          - ./:$GOPATH/src/github.com/bagusandrian/mini-api
-        working_dir: $GOPATH/src/github.com/bagusandrian/mini-api
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        ports:
+            - "127.0.0.1:8000:9090"
         links:
             - postgres
-        ports: 
-          - "8000:9090"
-        command: bash -c "mkdir -p /go/src && mkdir -p /go/bin && mkdir -p /go/pkg && export GOPATH=/go && export PATH=$GOPATH/bin:$PATH && go get -u github.com/golang/dep/cmd/dep && dep version && dep ensure -v && GOCACHE=off go test -cover -v -timeout 60s ./... && go build -v && ./mini-api"

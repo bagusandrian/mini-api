@@ -1,10 +1,12 @@
 FROM golang:1.11.0-stretch
 
+  # EXPOSE 8000
   RUN  mkdir -p /go/src \
     && mkdir -p /go/bin \
     && mkdir -p /go/pkg
   ENV GOPATH=/go
   ENV PATH=$GOPATH/bin:$PATH   
+  ENV ENVSYS=production   
 
   RUN mkdir -p $GOPATH/src/github.com/bagusandrian 
   ADD . $GOPATH/src/github.com/bagusandrian/mini-api
