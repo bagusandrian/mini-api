@@ -1,24 +1,25 @@
-version: "3"
+    version: "3"
 
-services:
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_USER: mini_api
-      POSTGRES_PASSWORD: p4ssw0rd
-      POSTGRES_DB: mini-api
-    volumes:
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
-    ports:
-     - "5433:5432"
+    services:
+      postgres:
+        image: postgres
+        environment:
+          POSTGRES_USER: mini_api
+          POSTGRES_PASSWORD: p4ssw0rd
+          POSTGRES_DB: mini-api
+        volumes:
+          - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+        ports:
+        - "5433:5432"
 
-  golang:
-    image: golang:1.11.0-stretch
-    volumes:
-      - ./:$GOPATH/src/github.com/bagusandrian/mini-api
-    working_dir: $GOPATH/src/github.com/bagusandrian/mini-api
-    links:
-        - postgres
-    ports: 
-      - "8000:9090"
-    command: bash -c "go get -v && go build && ./mini-api"
+      golang:
+        image: golang:1.11.0-stretch
+        build: .
+        volumes:
+          - ./:$GOPATH/src/github.com/bagusandrian/mini-api
+        working_dir: $GOPATH/src/github.com/bagusandrian/mini-api
+        links:
+            - postgres
+        ports: 
+          - "8000:9090"
+        command: bash -c "dep ensure -v && go build -v && ./mini-api"

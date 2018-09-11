@@ -31,4 +31,4 @@ $ export ENVSYS=development # to run in development environment. this is default
 ### run with docker
 
 # API DOCUMENTATION
-for api u can see: [API DOCUMENTATION](https://github.com/bagusandrian/mini-api/blob/branch/api_documentation.md)
+for api u can see: [API DOCUMENTATION](https://github.com/bagusandrian/mini-api/blob/master/api_documentation.md)

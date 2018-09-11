@@ -8,7 +8,7 @@ Development | localhost:9090
 
 ### Endpoint
 | Service | Description | Method |Endpoints
-|-----|-----|-----|-----|-----
+|-----|-----|-----|-----
 [Tax List](#tax-list) | Get information list of tax | `GET` | `mini-api/tax/list`
 [Register User](#register-user) | Register new user | `POST` | `mini-api/user/register`
 [User list](#user-list) | Get list of users | `GET` | `mini-api/user/list`
